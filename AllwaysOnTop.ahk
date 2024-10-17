@@ -6,9 +6,9 @@
     if (ExStyle & 0x8) ; Se è già in "always on top"
     {
         Winset, AlwaysOnTop, Off, ahk_id %WindowID%
-        ; Ferma il timer e rimuovi l'indicatore
+        ; Ferma il timer e nascondi l'indicatore
         SetTimer, UpdateIndicator, Off
-        Gui, Destroy
+        Gui, Hide
     }
     else
     {
@@ -17,7 +17,7 @@
         {
             Winset, AlwaysOnTop, Off, ahk_id %CurrentWindowID%
             SetTimer, UpdateIndicator, Off
-            Gui, Destroy
+            Gui, Hide
         }
 
         ; Imposta la nuova finestra come "always on top"
@@ -32,16 +32,28 @@ UpdateIndicator:
     ; Verifica se la finestra esiste ancora
     if !WinExist("ahk_id " . CurrentWindowID)
     {
-        ; Se la finestra è stata chiusa, ferma il timer e rimuovi l'indicatore
+        ; Se la finestra è stata chiusa, ferma il timer e nascondi l'indicatore
         SetTimer, UpdateIndicator, Off
-        Gui, Destroy
+        Gui, Hide
         CurrentWindowID := ""
         return
     }
 
     ; Ottieni la posizione della finestra attiva
     WinGetPos, X, Y, W, H, ahk_id %CurrentWindowID%
-    ; Aggiorna la posizione dell'indicatore
-    Gui, +AlwaysOnTop
-    Gui, Show, NoActivate x%X% y%Y% w20 h20
+
+    ; Aggiorna la posizione dell'indicatore senza ricreare la GUI
+    Gui, +AlwaysOnTop +ToolWindow -Caption -SysMenu +E0x20
+    Gui, Color, Blue ; Imposta il colore di sfondo in blu
+
+    ; Se l'indicatore non è stato ancora creato, aggiungi il testo
+    if !IndicatorCreated
+    {
+        Gui, Font, s20, Arial ; Imposta la dimensione del carattere a 20
+        Gui, Add, Text, x0 y-2 w30 h30 Center cWhite, 🔝 ; Usa l'emoji "TOP" per rappresentare il bollino
+        IndicatorCreated := true
+    }
+
+    ; Mostra la GUI e aggiorna la posizione dell'indicatore
+    Gui, Show, NoActivate x%X% y%Y% w30 h30 ; Modifica le dimensioni e la posizione
 return

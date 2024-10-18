@@ -44,12 +44,13 @@ UpdateIndicator:
 
     ; Aggiorna la posizione dell'indicatore senza ricreare la GUI
     Gui, +AlwaysOnTop +ToolWindow -Caption -SysMenu +E0x20
-    Gui, Color, Blue ; Imposta il colore di sfondo in blu
+    Gui, Color, Aqua ; Imposta il colore di sfondo
 
-    ; Se l'indicatore non è stato ancora creato, aggiungi l'immagine
+    ; Se l'indicatore non è stato ancora creato, aggiungi il testo
     if !IndicatorCreated
     {
-        Gui, Add, Picture, x0 y1 w30 h30, AOT_Icon32.png ; Usa l'icona "AOT_Icon.png" per rappresentare il bollino
+        Gui, Font, s20, Arial ; Imposta la dimensione del carattere a 20
+        Gui, Add, Text, x0 y-2 w30 h30 Center cWhite, 🔼 ; Usa l'emoji "TOP" per rappresentare il bollino
         IndicatorCreated := true
     }
 

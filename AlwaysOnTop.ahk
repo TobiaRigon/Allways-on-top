@@ -54,6 +54,7 @@ UpdateIndicator:
         IndicatorCreated := true
     }
 
-    ; Mostra la GUI e aggiorna la posizione dell'indicatore
+    ; Assicurati che la GUI sia sempre sopra tutte le finestre
+    Gui, +AlwaysOnTop
     Gui, Show, NoActivate x%X% y%Y% w30 h30 ; Modifica le dimensioni e la posizione
 return

@@ -1,4 +1,5 @@
-![AOT_Icon32-1](https://github.com/user-attachments/assets/cb2024a0-5143-409e-b39f-38f141ae8b78) # AlwaysOnTop AutoHotkey Script 
+# AlwaysOnTop AutoHotkey Script 
+![AOT_Icon32-1](https://github.com/user-attachments/assets/cb2024a0-5143-409e-b39f-38f141ae8b78) 
 
 
 This AutoHotkey script allows you to easily toggle "Always on Top" mode for the currently active window using a keyboard shortcut. When the mode is active, a small visual indicator is displayed in the top-left corner of the window.
